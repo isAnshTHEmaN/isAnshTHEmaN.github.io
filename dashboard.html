@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bus Route Dashboard</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="dashboard.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+</head>
+
+<body onload="showDashboard()">
+    <div class="dashboard-topbar d-flex align-items-center p-3">
+        <img src="brlogo.jpg" alt="BR Logo" style="width:40px;height:40px;border-radius:50%;margin-right:10px;">
+        <span class="district-name" style="font-size:1.2em;">Bridgewater-Raritan Regional School District</span>
+        <div class="profile-info ms-auto d-flex align-items-center" onclick="toggleDropdown()">
+          <img src="appa.png" alt="Profile Picture" class="me-2">
+          <span class="username">User</span>
+          <span class="dropdown-arrow ms-1">&#9662;</span>
+          <div class="profile-dropdown">
+            <a href="https://students.c2.genesisedu.net/bernardsboe/sis/view?gohome=true">Profile</a>
+            <!-- Now goes to our new settings page -->
+            <a href="settings.html">Settings</a>
+            <a href="login.html">Logout</a>
+          </div>
+        </div>
+      </div>
+
+    <div class="container mt-3">
+        <!-- Student cards will be populated dynamically -->
+    </div>
+    <div class="container">
+        <div class="bus-status-header">
+          <div class="form-select-container">
+            <label for="school-select"><strong>School:</strong></label>
+            <select id="school-select" class="form-select form-select-sm" onchange="showDashboard()">
+              <option value="vanholten" selected>Adamsville Primary School</option>
+              <option value="milltown">Milltown Primary School</option>
+            </select>
+          </div>
+        </div>
+
+        <!-- Van Holten Table -->
+        <table id="vanholten" class="bus-status-table mt-2">
+          <thead>
+            <tr>
+              <th>Bus Number</th>
+              <th>Status</th>
+              <th>Driver</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A01</td>
+              <td><span class="status-tag delayed">DELAYED - 5 MIN</span></td>
+              <td><span class="driver-tag">Mr. José García</span></td>
+            </tr>
+            <tr>
+              <td>A02</td>
+              <td><span class="status-tag cancelled">CANCELLED</span></td>
+              <td><span class="driver-tag">Ms. Latoya Johnson</span></td>
+            </tr>
+            <tr>
+              <td>A03</td>
+              <td><span class="status-tag delayed">DELAYED - 3 MIN</span></td>
+              <td><span class="driver-tag">Mr. Carlos Hernández</span></td>
+            </tr>
+            <tr>
+              <td>A04</td>
+              <td><span class="status-tag ontime">ON TIME</span></td>
+              <td><span class="driver-tag">Ms. Angela Davis</span></td>
+            </tr>
+          </tbody>
+        </table>
+
+        <!-- Milltown Table -->
+     
+      </div>
+
+      <hr class="section-divider">
+
+    <div class="container">
+        <div class="bus-status-header">
+            <h4>Bus Status</h4>
+        </div>
+        
+        <table id="busTable" class="bus-status-table mt-2">
+            <thead>
+                <tr>
+                    <th>Bus Number</th>
+                    <th>Status</th>
+                    <th>Driver</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Bus data will be populated dynamically -->
+            </tbody>
+        </table>
+    </div>
+      
+    <div class="toggle-container d-flex align-items-center">
+        <button class="toggle-btn" onclick="toggleDashboard()">
+            <span class="toggle-arrow">&#9662;</span>
+            <span class="toggle-text">Updates Dashboard</span>
+        </button>
+    </div>
+
+    <div id="update-dashboard" class="update-dashboard">
+        <h3>Update Dashboard</h3>
+        <ul class="update-list">
+            <!-- Incidents will be populated dynamically -->
+        </ul>
+    </div>
+
+
+
+    <div class="refresh-container">
+        <button class="refresh-btn" onclick="window.location.reload()">
+            <i class="fas fa-sync-alt"></i> Refresh
+        </button>
+    </div>
+
+    <div class="logout-container mt-4">
+        <a href="login.html" class="btn logout-btn">Logout</a>
+    </div>
+    
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/js/bootstrap.bundle.min.js"></script>
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        function toggleMap(mapId, driverId) {
+            const mapContainer = document.getElementById(mapId);
+            const driverCard = document.getElementById(driverId);
+            if (mapContainer.style.display === "none") {
+                mapContainer.style.display = "block";
+                driverCard.style.display = "block";
+
+                const map = L.map(mapId).setView([40.585417, -74.632778], 13);
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                }).addTo(map);
+
+                const busIcon = L.icon({
+                    iconUrl: 'bus-marker.png', 
+                    iconSize: [32, 37], 
+                    iconAnchor: [16, 37],
+                });
+
+                L.marker([40.585417, -74.632778], { icon: busIcon }).addTo(map)
+                    .openPopup();
+
+                driverCard.innerHTML = `
+                    <div class="driver-card card mt-3">
+                        <div class="card-body d-flex align-items-center">
+                            <img src="default-profile.jpg" alt="Driver Profile Picture" class="driver-profile-pic me-3">
+                            <div>
+                                <div class="driver-name">Mr. Rangwalla</div>
+                                <div class="text-muted">Last updated: 42 seconds ago</div>
+                            </div>
+                        </div>
+                    </div>`;
+            } else {
+                mapContainer.style.display = "none";
+                driverCard.style.display = "none";
+            }
+        }
+    </script>
+    <script>
+        document.querySelectorAll('.bus-status-table tbody tr').forEach(row => {
+            row.addEventListener('click', function () {
+                const table = document.querySelector('.bus-status-table');
+                if (table.classList.contains('expanded')) {
+                    table.classList.remove('expanded');
+                    table.style.maxHeight = '300px';
+                } else {
+                    table.classList.add('expanded');
+                    table.style.maxHeight = 'none';
+                }
+            });
+        });
+    </script>
+    <script>
+                const table = document.querySelector('.bus-status-table');
+        const closeBtn = document.querySelector('.close-btn');
+
+        table.addEventListener('click', function () {
+            if (!table.classList.contains('table-expanded')) {
+                table.classList.add('table-expanded');
+                closeBtn.style.display = 'block';
+            }
+        });
+
+        closeBtn.addEventListener('click', function () {
+            table.classList.remove('table-expanded');
+            closeBtn.style.display = 'none';
+        });
+    </script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const rows = document.querySelectorAll('.bus-status-table tbody tr');
+            rows.forEach(row => {
+                const statusCell = row.querySelector('td:nth-child(2) span');
+                const isDelayed = Math.random() > 0.5;
+                if (isDelayed) {
+                    const delayMinutes = Math.floor(Math.random() * 30) + 1;  
+                    statusCell.className = 'status-delayed';
+                    statusCell.textContent = `${delayMinutes} MIN DELAY`;
+                } else {
+                    statusCell.className = 'status-ontime';
+                    statusCell.textContent = 'ON TIME';
+                }
+            });
+        });
+    </script>    
+<script>
+    function refreshPage() {
+    const btn = document.querySelector('.refresh-btn');
+    btn.classList.add('animate');
+    
+</script>
+        <script src="dashboard.js"></script>
+        <script src="map.js"></script>
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+<script src="dashboard.js"></script>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+
+    <script>
+        let map;
+
+        function toggleMap(mapId, driverId) {
+            const mapContainer = document.getElementById(mapId);
+            const driverCard = document.getElementById(driverId);
+
+            if (mapContainer.style.display === "none") {
+                mapContainer.style.display = "block";
+                driverCard.style.display = "block";
+
+                if (!map) {
+                    map = L.map(mapId).setView([40.585417, -74.632778], 15); // Center near Miltown Elementary
+
+                    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+                        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+                    }).addTo(map);
+
+                    const busIcon = L.icon({
+                        iconUrl: 'bus-marker.png',
+                        iconSize: [32, 37],
+                        iconAnchor: [16, 37],
+                    });
+
+                  
+                    const routeCoordinates = [
+                        [40.585417, -74.632778],
+                        [40.584900, -74.630500],
+                        [40.585200, -74.628300],
+                        [40.586200, -74.626500],
+                        [40.587000, -74.624000],
+                    ];
+
+                    
+                    const route = L.polyline(routeCoordinates, { color: 'blue' }).addTo(map);
+
+                    
+                    L.marker(routeCoordinates[0], { icon: busIcon }).addTo(map)
+                        .bindPopup('Bus starting point')
+                        .openPopup();
+                }
+
+                driverCard.innerHTML = `
+                    <div class="driver-card card mt-3">
+                        <div class="card-body d-flex align-items-center">
+                            <img src="default-profile.jpg" alt="Driver Profile Picture" class="driver-profile-pic me-3">
+                            <div>
+                                <div class="driver-name">Mr. Sheng</div>
+                                <div class="text-muted">Last updated: 31 seconds ago</div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            } else {
+                mapContainer.style.display = "none";
+                driverCard.style.display = "none";
+            }
+        }
+    </script>
+
+
+
+</body>
+
+</html>

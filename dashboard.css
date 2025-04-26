@@ -1,0 +1,802 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Rethink Sans', Arial, sans-serif;
+    background-color: #FFCC80; 
+}
+
+.dashboard-topbar {
+    display: flex;
+    align-items: center;
+    padding: 10px;
+    background-color: #f8f9fa;
+    border-bottom: 2px solid #e9ecef;
+}
+
+.dashboard-topbar img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.dashboard-topbar .district-name {
+    font-size: 12px;
+    font-weight: bold;
+    color: #333;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.profile-info {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    margin-left: auto;
+    position: relative;
+}
+
+.profile-info img {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    margin-right: 8px;
+}
+
+.username {
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #333;
+    margin-right: 5px;
+}
+
+.profile-info .dropdown-arrow {
+    transition: transform 0.3s ease;
+}
+
+.profile-info:hover .dropdown-arrow {
+    transform: rotate(180deg);
+}
+
+.profile-dropdown {
+    display: none;
+    position: absolute;
+    right: 0;
+    top: 50px;
+    background-color: white;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    z-index: 1000;
+}
+
+.profile-info.active .profile-dropdown {
+    display: block;
+}
+
+.profile-dropdown a {
+    display: block;
+    padding: 10px 20px;
+    color: #333;
+    text-decoration: none;
+}
+
+.profile-dropdown a:hover {
+    background-color: #f8f9fa;
+}
+
+.child-card {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #fff;
+    padding: 10px 15px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    margin-bottom: 10px;
+    animation: slide-in 0.5s ease-out;
+}
+
+.child-card:hover {
+    transform: translateY(-5px);
+}
+
+.child-info {
+    display: flex;
+    align-items: center;
+    gap: none;
+}
+
+.child-card .child-info div {
+    margin-left: 1px;
+}
+
+.profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 70%;
+    object-fit: cover;
+    flex-shrink: 0;
+}
+.child-name {
+    font-size: 1em;
+    font-weight: bold;
+    margin-right: 10px;
+    display: flex;
+    align-items: center;
+}
+
+.bus-info {
+    background-color: #000;
+    color: #fff;
+    padding: 2px 5px;
+    border-radius: 5px;
+    font-size: 0.9em;
+    font-weight: bold;
+    margin-left: 1px;
+    display: inline-block;
+}
+
+.status-box {
+    padding: 5px 8px;
+    font-size: 14px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.status-delayed {
+    background-color: orange;
+}
+
+.status-ontime {
+    background-color: green;
+}
+
+.view-map-icon {
+    font-size: 20px;
+    padding: 5px;
+    margin-left: 8px;
+    cursor: pointer;
+    color: #000000;
+}
+
+.view-map-icon:hover {
+    background-color: #f0f0f0;
+    transform: scale(1.1);
+}
+
+.view-map-icon i {
+    font-size: 1.2em;
+}
+
+@media (max-width: 576px) {
+    .child-card {
+        flex-direction: row;
+    }
+
+    .district-name {
+        font-size: 0.9em;
+    }
+
+    .username {
+        font-size: 0.8em;
+    }
+
+    .profile-pic-placeholder {
+        width: 50px;
+        height: 50px;
+    }
+
+    .bus-info {
+        font-size: 0.8em;
+        margin-left: 5px;
+    }
+
+    .status-box {
+        width: 80px;
+        font-size: 0.8em;
+    }
+}
+
+@keyframes slide-in {
+    from {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.driver-card {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.driver-profile-pic {
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.driver-name {
+    font-size: 1em;
+    font-weight: bold;
+}
+
+
+
+.school-dropdown {
+    margin-bottom: 10px;
+}
+
+.bus-status-header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 10px;
+    background-color: #ffffff;
+    border-radius: 10px 10px 0 0; 
+    text-align: center; 
+}
+
+.bus-status-header > * {
+    margin: 0 10px; 
+}
+
+.bus-status-table {
+    width: 100%; 
+    border-collapse: collapse;
+    background-color: #ffffff;
+    border-radius: 0 0 10px 10px; 
+}
+
+.bus-status-table th, .bus-status-table td {
+    padding: 12px 15px;
+    text-align: left;
+    border-bottom: 1px solid #ffffff;
+}
+
+.bus-status-table .status-delayed {
+    background-color: orange;
+    padding: 1px 5px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.bus-status-table .status-ontime {
+    background-color: green;
+    padding: 1px 5px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+}
+
+.bus-status-table .status-cancelled {
+    background-color: red;
+    padding: 1px 5px;
+    font-size: 15px;
+    font-weight: bold;
+    border-radius: 5px;
+    color: #ffffff;
+    text-align: center;
+}
+.form-select-container {
+    position: relative;
+    display: inline-block; 
+}
+
+.update-dashboard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+}
+
+.update-dashboard h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.update-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+.section-divider {
+    border: none;
+    border-top: 2px solid #e9ecef;
+    margin: 2rem 0;
+  }
+  
+.update-item {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  
+
+.update-item:last-child {
+    border-bottom: none;
+}
+
+.update-info {
+    display: flex;
+    flex-direction: column;
+}
+
+.update-message {
+    font-weight: bold;
+    color: #333;
+}
+
+.update-time, .update-days {
+    font-size: 0.9em;
+    color: #777;
+}
+
+.update-type {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 25px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+}
+
+.update-type.road-closure {
+    background-color: red;
+}
+
+.update-type.crash {
+    background-color: darkorange;
+}
+
+.update-type.construction {
+    background-color: grey;
+}
+
+.affected-buses {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #ddd; 
+}
+
+.affected-buses strong {
+    font-weight: bold;
+    color: #333;
+    display: block;
+}
+
+.bus-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-top: 5px;
+}
+
+.bus-tag {
+    background-color: black;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-size: 0.9em;
+    font-weight: bold;
+}
+
+.toggle-container {
+    margin-top: 20px;
+    text-align: center; 
+}
+
+.toggle-btn {
+    background-color: #fff;
+    border-radius: 20px; 
+    padding: 10px 20px;
+    font-size: 1.2em;
+    color: #333;
+    margin: 0 auto;
+    max-width: 95%;
+    font-weight: bold;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    width: 100%;
+    border: none;
+    text-align: center;
+
+}
+
+.toggle-btn:hover {
+    background-color: #ffffff;
+    color: #000;
+}
+
+.toggle-arrow {
+    font-size: 1.5em;
+    margin-right: 10px;
+    transition: transform 0.3s ease;
+}
+
+.update-dashboard {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+    display: none; 
+}
+
+.update-dashboard.show {
+    display: block;
+}
+
+.update-dashboard-container {
+    display: flex;
+    justify-content: center;
+    padding: 0 15px;
+}
+
+.notification-settings {
+    background-color: #fff;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 15px;
+    margin-top: 20px;
+    max-width: 95%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+
+
+
+.notification-settings h3 {
+    font-size: 1.5em;
+    margin-bottom: 15px;
+    color: #333;
+}
+
+.notification-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1em;
+    color: #333;
+}
+
+.notification-toggle i {
+    font-size: 1.5em;
+}
+
+.switch {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 24px;
+}
+
+.switch input {
+    opacity: 0;
+    width: 0;
+    height: 0;
+}
+
+.slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ffffff;
+    transition: .4s;
+    border-radius: 24px;
+}
+
+.slider:before {
+    position: absolute;
+    content: "";
+    height: 16px;
+    width: 16px;
+    border-radius: 50%;
+    left: 4px;
+    bottom: 4px;
+    background-color: white;
+    transition: .4s;
+}
+
+input:checked + .slider {
+    background-color: green;
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.form-check-input {
+    margin-right: 10px;
+}
+
+.form-check-label {
+    font-size: 1em;
+    color: #333;
+}
+
+.notification-popup {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: #28a745;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 5px;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    font-weight: bold;
+    display: flex;
+    text-align: center;
+    align-items: center;
+}
+
+.notification-popup i {
+    margin-right: 10px;
+}
+
+.notification-popup.show {
+    display: flex;
+    animation: fade-in-out 3s ease-in-out;
+}
+
+@keyframes fade-in-out {
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    10% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    90% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+}
+
+.logout-container {
+    text-align: center;
+    margin-top: 19px;
+}
+
+.logout-btn {
+    background-color: black;
+    color: white;
+    padding: 10px 20px;
+    border-radius: 25px;
+    text-decoration: none;
+    font-weight: bold;
+    display: inline-block;
+    transition: background-color 0.3s ease;
+}
+
+.logout-btn:hover {
+    background-color: #333;
+}
+
+.refresh-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    margin-bottom: 1px;
+}
+
+.refresh-btn {
+    background-color: black;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 10px 20px;
+    font-size: 1em;
+    font-weight: bold;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.refresh-btn i {
+    margin-right: 8px;
+    font-size: 1.2em;
+}
+
+.refresh-btn:hover {
+    background-color: #333;
+}
+
+/* Animation for the rotating icon */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.refresh-btn.animate i {
+    animation: spin 1s linear infinite;
+}
+
+/* ----------------------------------- */
+/* Driver tags (same style as bus-tag) */
+.driver-tag {
+    display: inline-block;
+    background-color: #000;
+    color: #fff;
+    padding: 5px 10px;
+    border-radius: 15px;
+    font-size: 0.9em;
+    font-weight: bold;
+  }
+  
+  /* Status tags (mimic .update-type pills) */
+  .status-tag {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px 8px;
+    border-radius: 12px;
+    font-size: 0.9em;
+    font-weight: bold;
+    color: #fff;
+  }
+  .status-tag.delayed   { background-color: orange; }
+  .status-tag.ontime    { background-color: green; }
+  .status-tag.cancelled { background-color: red; }
+
+/* Update Dashboard Styling */
+.update-list {
+    list-style: none;
+    padding: 0;
+}
+
+.update-item {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 15px 0;
+}
+
+
+.incident-tag.bus-breakdown {
+    background-color: #ff4444;
+    color: white;
+    display: inline-block;   /* shrink-to-fit its contents */
+    width: auto;             /* let the browser size it to its text + padding */
+    /* or, if you need better cross-browser support: */
+    /* width: fit-content; */
+    /* width: -moz-fit-content; */
+    /* width: -webkit-fit-content; */
+    white-space: nowrap; 
+}
+
+.incident-tag.closure {
+    background-color: #ff0000;
+    color: white;
+    display: inline-block;   /* shrink-to-fit its contents */
+    width: auto;             /* let the browser size it to its text + padding */
+    /* or, if you need better cross-browser support: */
+    /* width: fit-content; */
+    /* width: -moz-fit-content; */
+    /* width: -webkit-fit-content; */
+    white-space: nowrap; 
+}
+
+.incident-tag.crash {
+    background-color: #ff8c00;
+    color: white;
+}
+
+.incident-tag.work {
+    background-color: #808080;
+    color: white;
+}
+
+.bus-tags {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.bus-tag {
+    background-color: #000;
+    color: white;
+    padding: 5px 12px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 0.9em;
+}
+
+.incident-title {
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.incident-meta {
+    font-size: 0.9em;
+    color: #666;
+}
+
+.time-ago {
+    font-size: 0.9em;
+    color: #666;
+}
+
+    /* Incident Tag Base Styles */
+    /* Incident Tag Base Styles */
+    .incident-tag {
+        display: inline-block;
+        padding: 4px 12px; /* Keep some padding but let width adjust */
+        padding: 5px 12px;
+        border-radius: 20px;
+        font-weight: 600;
+        font-size: 0.9em;
+        color: white;
+        text-transform: uppercase;
+        margin: 8px 0;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        white-space: nowrap; /* Prevent text from wrapping */
+        min-width: min-content; /* Ensure tag is at least as wide as its content */
+    }
+
+    /* Specific Incident Type Colors */
+    .road-crash-tag {
+        background-color: #dc3545; /* Red */
+        border: 1px solid #c82333;
+    }
+
+    .road-closure-tag {
+        background-color: #ffc107; /* Yellow */
+        color: #212529;
+        border: 1px solid #e0a800;
+    }
+
+    .bus-breakdown-tag {
+        background-color: #fd7e14; /* Orange */
+        border: 1px solid #e36209;
+    }
+
+    .traffic-tag {
+        background-color: #6f42c1; /* Purple/Brown */
+        border: 1px solid #5a32a3;
+    }
+
+    .weather-tag {
+        background-color: #0d6efd; /* Blue */
+        border: 1px solid #0b5ed7;
+    }
+
+    /* Optional hover effects */
+    .incident-tag:hover {
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+        transition: all 0.2s ease;
+    }

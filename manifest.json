@@ -1,0 +1,17 @@
+{
+    "name": "Routify",
+    "short_name": "Routify",
+    "theme_color": "#f2c179",
+    "background_color": "#f2c179",
+    "display": "standalone",
+    "scope": "/",
+    "start_url": "https://routifybrrsd.github.io",
+    "description": "An app to track school buses.",
+    "orientation": "any",
+    "icons": [
+        {
+            "src": "https://christine.website/static/img/avatar.png",
+            "sizes": "1024x1024"
+        }
+    ]
+}

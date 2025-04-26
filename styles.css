@@ -1,0 +1,208 @@
+@import url('https://fonts.googleapis.com/css2?family=Rethink+Sans:wght@400;700&display=swap');
+
+body, html {
+    height: 100%;
+    margin: 0;
+    font-family: 'Rethink Sans', Arial, sans-serif;
+    background-color: #FFCC80;
+}
+
+.login-container {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    max-width: 500px;
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.login-board {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+}
+
+.input-group input, .form-control {
+    border-radius: 10px;
+    border: 2px solid #ccc;
+    transition: all 0.3s ease;
+}
+
+.input-group input:focus, .form-control:focus {
+    border-color: #FFAA00;
+    outline: none;
+}
+
+.btn-dark, .btn-secondary {
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    transition: transform 0.2s, background-color 0.3s;
+}
+
+.btn-dark:hover {
+    background-color: #333333;
+    transform: scale(1.05);
+}
+
+.btn-dark:disabled {
+    background-color: #a6a6a6;
+    cursor: not-allowed;
+}
+
+.signup-text {
+    color: #000000;
+    font-size: 0.9em;
+}
+
+.signup-text a {
+    color: #FFAA00;
+    font-weight: bold;
+    transition: text-decoration 0.3s ease;
+}
+
+.signup-text a:hover {
+    text-decoration: underline;
+}
+
+.arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+}
+
+.signup-text a:hover .arrow {
+    transform: translateX(-5px);
+}
+
+.logo img {
+    width: 70px;
+    height: 70px;
+    border: none;
+    border-radius: 50%;
+    animation: logo-fade-in 1s ease-out;
+}
+
+@keyframes logo-fade-in {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+h3 {
+    font-size: 1.5em;
+}
+
+h5 {
+    font-size: 1.2em;
+    color: #333;
+}
+
+.error-message {
+    color: #ff0000;
+    font-size: 0.9em;
+    margin-top: 0.5em;
+}
+
+.form-control.error {
+    border-color: #ff0000;
+}
+
+.popup {
+    position: fixed;
+    bottom: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    border-radius: 5px;
+    padding: 15px;
+    max-width: 90%;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    z-index: 1050;
+}
+
+.popup-content {
+    display: flex;
+    align-items: center;
+}
+
+.popup i {
+    font-size: 20px;
+    margin-right: 10px;
+}
+
+.popup span {
+    font-size: 16px;
+}
+
+.popup.d-none {
+    display: none;
+}
+
+#parent-button, #student-button {
+    border-radius: 30px;
+    font-size: 1em;
+    font-weight: bold;
+    padding: 10px;
+    background-color: #007bff;
+    color: #ffffff;
+    border: 2px solid transparent;
+    transition: transform 0.2s, background-color 0.3s, border 0.3s;
+}
+
+#student-button {
+    background-color: #6c757d;
+    border: 2px solid transparent;
+}
+
+#parent-button:hover, #student-button:hover {
+    background-color: #ffffff;
+    color: #007bff;
+    border: 2px solid #007bff;
+}
+
+#student-button:hover {
+    color: #6c757d;
+    border: 2px solid #6c757d;
+}
+
+.verification-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1100;
+}
+
+.verification-content {
+    background-color: #FFCC00;
+    color: #000;
+    padding: 20px 30px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    font-weight: bold;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.verification-popup.d-none {
+    display: none;
+}
