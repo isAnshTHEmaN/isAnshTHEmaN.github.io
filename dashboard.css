@@ -662,6 +662,9 @@ input:checked + .slider:before {
   /* Status tags (mimic .update-type pills) */
   .status-tag {
     display: inline-flex;
+    flex-wrap: nowrap;
+    white-space: nowrap;
+    width: auto;
     align-items: center;
     justify-content: center;
     padding: 2px 8px;
